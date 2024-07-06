@@ -4,6 +4,7 @@ const config = require('./utils/config')
 const logger = require('./utils/logger')
 const middleware = require('./utils/middleware')
 const usersRouter = require('./controllers/users')
+const propertiesRouter = require('./controllers/properties')
 
 const cors = require('cors')
 
@@ -21,6 +22,8 @@ app.use(cors())
 app.use(middleware.requestLogger)
 
 app.use('/api/users', usersRouter)
+app.use('/api/properties', propertiesRouter)
+
 app.use(middleware.unknownEndpointHandler)
 app.use(middleware.errorHandler)
 
