@@ -2,7 +2,7 @@ const express = require('express')
 const Property = require('../models/property')
 const propertiesRouter = express.Router()
 
-usersRouter.get('/', async (request, response, next) => {
+propertiesRouter.get('/', async (request, response, next) => {
   try {
     const properties = await Property.find({})
     response.send(properties)
@@ -11,7 +11,7 @@ usersRouter.get('/', async (request, response, next) => {
   }
 })
 
-usersRouter.get('/:id', async (request, response, next) => {
+propertiesRouter.get('/:id', async (request, response, next) => {
   try {
     const property = await Property.findById(request.params.id)
     if (!property) {
@@ -23,19 +23,18 @@ usersRouter.get('/:id', async (request, response, next) => {
   }
 })
 
-usersRouter.post('/', async (request, response, next) => {
+propertiesRouter.post('/', async (request, response, next) => {
   const { name, country, price, isAvailable } = request.body
   const propertyObject = new Property({ name, country, price, isAvailable })
   try {
     const savedProperty = await propertyObject.save()
     response.status(201).send(savedProperty)
-    response.send(properties)
   } catch (error) {
     next(error)
   }
 })
 
-usersRouter.put('/:id', async (request, response, next) => {
+propertiesRouter.put('/:id', async (request, response, next) => {
   const { name, country, price, isAvailable } = request.body
   try {
     const updatedProperty = await Property.findByIdAndUpdate(
@@ -50,7 +49,7 @@ usersRouter.put('/:id', async (request, response, next) => {
   }
 })
 
-usersRouter.delete('/:id', async (request, response, next) => {
+propertiesRouter.delete('/:id', async (request, response, next) => {
   try {
     await Property.findByIdAndDelete(request.params.id)
     response.sendStatus(204)
