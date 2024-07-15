@@ -19,7 +19,24 @@ describe('When there are some properties stored ', () => {
       .expect(200)
       .expect('Content-Type', /application\/json/)
   })
+
+  test('all properties are returned', async () => {
+    const response = await api.get('/api/properties')
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+    expect(response.body).toHaveLength(helper.propertyData.length)
+  })
+
+  test('a specific property is among the returned properties', async () => {
+    const response = await api.get('/api/properties')
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+      const names = response.body.map(p => p.name)
+    expect(names).toContain(helper.propertyData[0].name)
+  })
 })
+
+
 
 
 afterAll(async () => {
