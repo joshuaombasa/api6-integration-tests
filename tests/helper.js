@@ -35,6 +35,12 @@ const propertyData = [
   }
 ]
 
+const propertiesInDb = async() => {
+  const properties = await Property.find({})
+  const formattedproperties = properties.map(p => p.toJSON())
+  return formattedproperties
+}
 
 
-module.exports = { propertyData }
+
+module.exports = { propertyData, propertiesInDb }
