@@ -37,6 +37,15 @@ describe('When there are some properties stored ', () => {
 })
 
 
+describe('fetching a spacific property', () => {
+  test('succeeds with status code 200 when given a validId', async() => {
+    const propertiesInDb =  await helper.propertiesInDb()
+    const response = await api.get(`/api/properties/${propertiesInDb[0].id}`)
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+  })
+})
+
 
 
 afterAll(async () => {
