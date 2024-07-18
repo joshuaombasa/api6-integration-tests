@@ -44,6 +44,18 @@ describe('fetching a spacific property', () => {
       .expect(200)
       .expect('Content-Type', /application\/json/)
   })
+
+  test('fails with status code 400 when given an invalidId', async() => {
+    const response = await api.get(`/api/properties/32576095`)
+      .expect(400)
+      .expect('Content-Type', /application\/json/)
+  })
+
+  test('fails with status code 400 when given an nonExistent Id', async() => {
+    const response = await api.get(`/api/properties/66995c959373585ef98b759`)
+      .expect(404)
+      .expect('Content-Type', /application\/json/)
+  })
 })
 
 
