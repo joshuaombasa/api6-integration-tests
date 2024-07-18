@@ -19,6 +19,7 @@ propertiesRouter.get('/:id', async (request, response, next) => {
     }
     response.send(property)
   } catch (error) {
+    console.log(error.name)
     next(error)
   }
 })
