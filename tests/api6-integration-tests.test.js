@@ -31,27 +31,37 @@ describe('When there are some properties stored ', () => {
     const response = await api.get('/api/properties')
       .expect(200)
       .expect('Content-Type', /application\/json/)
-      const names = response.body.map(p => p.name)
+    const names = response.body.map(p => p.name)
     expect(names).toContain(helper.propertyData[0].name)
   })
 })
 
 
 describe('fetching a spacific property', () => {
-  test('succeeds with status code 200 when given a validId', async() => {
-    const propertiesInDb =  await helper.propertiesInDb()
+  test('succeeds with status code 200 when given a validId', async () => {
+    const propertiesInDb = await helper.propertiesInDb()
     const response = await api.get(`/api/properties/${propertiesInDb[0].id}`)
       .expect(200)
       .expect('Content-Type', /application\/json/)
   })
 
-  test('fails with status code 400 when given an invalidId', async() => {
+  test('fails with status code 400 when given an invalidId', async () => {
     const response = await api.get(`/api/properties/32576095`)
       .expect(400)
       .expect('Content-Type', /application\/json/)
   })
 
-  test('fails with status code 400 when given an nonExistent Id', async() => {
+  test('fails with status code 404 when given an nonExistent Id', async () => {
+    const response = await api.get(`/api/properties/66995c959373585ef98b759`)
+      .expect(404)
+      .expect('Content-Type', /application\/json/)
+  })
+})
+
+
+describe('', () => {
+
+  test('fails with status code 404 when given an nonExistent Id', async () => {
     const response = await api.get(`/api/properties/66995c959373585ef98b759`)
       .expect(404)
       .expect('Content-Type', /application\/json/)
