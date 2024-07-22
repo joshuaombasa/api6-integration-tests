@@ -59,9 +59,15 @@ describe('fetching a spacific property', () => {
 })
 
 
-describe('', () => {
+describe('addition of a new property', () => {
 
-  test('fails with status code 404 when given an nonExistent Id', async () => {
+  test('succeeds when given valid data', async () => {
+    const response = await api.get(`/api/properties/66995c959373585ef98b759`)
+      .expect(404)
+      .expect('Content-Type', /application\/json/)
+  })
+
+  test('fails with status code 400 when given invalid data', async () => {
     const response = await api.get(`/api/properties/66995c959373585ef98b759`)
       .expect(404)
       .expect('Content-Type', /application\/json/)

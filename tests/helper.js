@@ -27,15 +27,16 @@ const propertyData = [
     "price": 850000,
     "isAvailable": false
   },
-  {
-    "name": "City Apartment",
-    "country": "Canada",
-    "price": 500000,
-    "isAvailable": true
-  }
 ]
 
-const propertiesInDb = async() => {
+const validProperty = {
+  "name": "City Apartment",
+  "country": "Canada",
+  "price": 500000,
+  "isAvailable": true
+}
+
+const propertiesInDb = async () => {
   const properties = await Property.find({})
   const formattedproperties = properties.map(p => p.toJSON())
   return formattedproperties
@@ -43,4 +44,4 @@ const propertiesInDb = async() => {
 
 
 
-module.exports = { propertyData, propertiesInDb }
+module.exports = { propertyData, propertiesInDb, validProperty }
