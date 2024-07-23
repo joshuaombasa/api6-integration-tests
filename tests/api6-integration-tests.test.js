@@ -62,17 +62,18 @@ describe('fetching a spacific property', () => {
 describe('addition of a new property', () => {
 
   test('succeeds when given valid data', async () => {
-    const response = await api.post(`/api/properties/66995c959373585ef98b759`)
-      .expect(200)
+    const response = await api.post(`/api/properties/`)
+      .expect(201)
       .send(helper.validProperty)
       .expect('Content-Type', /application\/json/)
   })
 
-  // test('fails with status code 400 when given invalid data', async () => {
-  //   const response = await api.get(`/api/properties/66995c959373585ef98b759`)
-  //     .expect(404)
-  //     .expect('Content-Type', /application\/json/)
-  // })
+  test('fails with status code 40 when given an invalid Property', async () => {
+    const response = await api.post(`/api/properties/`)
+      .expect(400)
+      .send(helper.invalidProperty)
+      .expect('Content-Type', /application\/json/)
+  })
 
 })
 
