@@ -26,6 +26,7 @@ propertiesRouter.get('/:id', async (request, response, next) => {
 
 propertiesRouter.post('/', async (request, response, next) => {
   const { name, country, price, isAvailable } = request.body
+  
   const propertyObject = new Property({ name, country, price, isAvailable })
   try {
     const savedProperty = await propertyObject.save()
