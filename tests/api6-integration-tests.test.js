@@ -77,6 +77,13 @@ describe('addition of a new property', () => {
 
 })
 
+desribe('Deleting a property', () => {
+  test('succeeds when given a valid ID', async () => {
+    const propertiesInDb = await helper.propertiesInDb()
+    const response = await api.delete(`/api/properties/${propertiesInDb[0].id}`)
+      .expect(204)
+  })
+})
 
 
 afterAll(async () => {
