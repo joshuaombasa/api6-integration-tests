@@ -53,7 +53,7 @@ propertiesRouter.put('/:id', async (request, response, next) => {
 
 propertiesRouter.delete('/:id', async (request, response, next) => {
   try {
-    await Property.findByIdAndDelete(request.params.id)
+    await Property.restima(request.params.id)
     response.sendStatus(204)
   } catch (error) {
     next(error)
