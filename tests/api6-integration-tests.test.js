@@ -62,17 +62,23 @@ describe('fetching a spacific property', () => {
 describe('addition of a new property', () => {
 
   test('succeeds when given valid data', async () => {
+    const propertiesInDbAtStart = await helper.propertiesInDb()
     const response = await api.post(`/api/properties/`)
       .expect(201)
       .send(helper.validProperty)
       .expect('Content-Type', /application\/json/)
+      const propertiesInDbAtEnd = await helper.propertiesInDb()
+      expect(propertiesInDbAtEnd).toHaveLength(propertiesInDbAtStart.length + 1)
   })
 
   test('fails with status code 400 when given an invalid Property', async () => {
+    const propertiesInDbAtStart = await helper.propertiesInDb()
     const response = await api.post(`/api/properties/`)
       .expect(400)
       .send(helper.invalidProperty)
       .expect('Content-Type', /application\/json/)
+      const propertiesInDbAtEnd = await helper.propertiesInDb()
+      expect(propertiesInDbAtEnd).toHaveLength(propertiesInDbAtStart.length)
   })
 
 })
@@ -82,6 +88,8 @@ describe('Deleting a property', () => {
     const propertiesInDb = await helper.propertiesInDb()
     const response = await api.delete(`/api/properties/${propertiesInDb[0].id}`)
       .expect(204)
+      const propertiesInDbAtEnd = await helper.propertiesInDb()
+      expect(propertiesInDbAtEnd).toHaveLength(propertiesInDb.length - 1)
   })
 })
 
