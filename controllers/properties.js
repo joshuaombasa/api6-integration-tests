@@ -19,7 +19,6 @@ propertiesRouter.get('/:id', async (request, response, next) => {
     }
     response.send(property)
   } catch (error) {
-    console.log(error.name)
     next(error)
   }
 })
@@ -53,7 +52,7 @@ propertiesRouter.put('/:id', async (request, response, next) => {
 
 propertiesRouter.delete('/:id', async (request, response, next) => {
   try {
-    await Property.restima(request.params.id)
+    await Property.findByIdAndDelete(request.params.id)
     response.sendStatus(204)
   } catch (error) {
     next(error)
