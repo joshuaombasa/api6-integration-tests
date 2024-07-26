@@ -52,7 +52,7 @@ describe('fetching a spacific property', () => {
   })
 
   test('fails with status code 404 when given an nonExistent Id', async () => {
-    const response = await api.get(`/api/properties/66995c959373585ef98b759`)
+    const response = await api.get(`/api/properties/66a3c5c3261b345a13bdda36`)
       .expect(404)
       .expect('Content-Type', /application\/json/)
   })
@@ -68,7 +68,7 @@ describe('addition of a new property', () => {
       .expect('Content-Type', /application\/json/)
   })
 
-  test('fails with status code 40 when given an invalid Property', async () => {
+  test('fails with status code 400 when given an invalid Property', async () => {
     const response = await api.post(`/api/properties/`)
       .expect(400)
       .send(helper.invalidProperty)
@@ -77,7 +77,7 @@ describe('addition of a new property', () => {
 
 })
 
-desribe('Deleting a property', () => {
+describe('Deleting a property', () => {
   test('succeeds when given a valid ID', async () => {
     const propertiesInDb = await helper.propertiesInDb()
     const response = await api.delete(`/api/properties/${propertiesInDb[0].id}`)
