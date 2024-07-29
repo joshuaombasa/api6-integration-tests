@@ -3,6 +3,7 @@ const User = require('../models/user')
 const usersRouter = express.Router()
 
 usersRouter.get('/', async (request, response, next) => {
+
   try {
     const users = await User.find({})
     response.send(users)
@@ -13,6 +14,7 @@ usersRouter.get('/', async (request, response, next) => {
 
 
 usersRouter.get('/:id', async (request, response, next) => {
+
   try {
     const user = await User.findById(request.params.id)
 
@@ -27,7 +29,9 @@ usersRouter.get('/:id', async (request, response, next) => {
 })
 
 usersRouter.post('/', async (request, response, next) => {
+
   const { email, password } = request.body
+
   try {
     const userObject = new User({ email, password })
     const savedUser = await userObject.save()
@@ -38,7 +42,9 @@ usersRouter.post('/', async (request, response, next) => {
 })
 
 usersRouter.put('/:id', async (request, response, next) => {
+  
   const { email, password } = request.body
+
   try {
     const updatedUser = await User.findByIdAndUpdate(
       request.params.id,
@@ -53,6 +59,7 @@ usersRouter.put('/:id', async (request, response, next) => {
 })
 
 usersRouter.delete('/:id', async (request, response, next) => {
+
   try {
     await User.findByIdAndDelete(request.params.id)
     response.sendStatus(204)
